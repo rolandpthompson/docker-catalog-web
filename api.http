@@ -1,0 +1,32 @@
+# define base url
+@dockerUrl = http://192.168.8.21:4000/v2
+@testName = dynamics-nav
+@testTag = 2018-cu9-gb
+# testDigest retreived from the manifest layers
+@testLayerDigest = sha256:bce76676554c3146e11e3a95e0ad7993adb28aa28061f149cbac7f80cf347a69
+
+### Get the catalog from the Repository
+GET {{dockerUrl}}/_catalog
+
+
+### Get the catalog from the Repository (paged = n being max records to return) - a Header Link means there are more...
+GET {{dockerUrl}}/_catalog?n=1
+
+### Gets the next sequence in the paged catalog result
+GET {{dockerUrl}}/_catalog?last=dynamics-nav&n=1
+
+### Get the tags for a known repository
+### Format - GET /<name>>/tags/list
+GET {{dockerUrl}}/{{testName}}/tags/list
+
+### Get the image manifest
+### Format - GET /<name>/manifests/<reference>   (<referance> can be a tag or digest)
+GET {{dockerUrl}}/{{testName}}/manifests/{{testTag}}
+
+### Pull a layer
+### Format - GET /v2/<name>/blobs/<digest>
+GET {{dockerUrl}}/v2/{{testName}}/blobs/{{testLayerDigest}}
+
+### Delete an image - reference MUST be a digest
+#### Format - DELETE /v2/<name>/manifests/<reference>
+DELETE {{dockerUrl}}/v2/<name>/manifests/<reference>
