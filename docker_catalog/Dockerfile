@@ -6,6 +6,8 @@ FROM python:3.8.1
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
 
+ENV DOCKER_BASE_URL http://192.168.8.21:4000/v2
+
 # create root directory for our project in the container
 RUN mkdir /docker_catalog_web
 
