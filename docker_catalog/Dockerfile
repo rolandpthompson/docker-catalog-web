@@ -1,5 +1,4 @@
-# The first instruction is what image we want to base our container on
-# We Use an official Python runtime as a parent image
+# Base Image
 FROM python:3.8.2
 
 LABEL maintainer="me@rolandthompson.co.uk"
@@ -20,6 +19,7 @@ VOLUME /project_live_code
 # to the terminal with out buffering it first
 ENV PYTHONUNBUFFERED 1
 ENV DOCKER_BASE_URL http://192.168.8.21:4000/v2
+ENV DEBUG_ENABLED False
 
 # Copy the current directory contents into the container at /docker_catalog_web
 ADD . /project_base_code/
@@ -31,7 +31,6 @@ RUN pip install -r /project_base_code/requirements.txt
 # expose our port
 EXPOSE 8000/tcp
 
-#RUN python3 manage.py runserver 0.0.0.0:8000
 # copy script file  - This copies the initial files and keeps the process alive...
 # copy our start script
 RUN dos2unix /scripts/start.sh && chmod -v +x /scripts/start.sh

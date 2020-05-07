@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'pa^m3yj6k_+#&yw+eloos+!#1_iw(%$s@@jm6%w3&i%5__pt$d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG_ENABLED', False)
 
 # my settings
 # _example_that_is_NOT_required = os.getenv('ENVIRONMENT_NAME', 1234)   # 1234 being the default value..
@@ -131,3 +131,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
