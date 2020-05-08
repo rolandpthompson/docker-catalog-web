@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'docker_catalog.urls'
+ROOT_URLCONF = 'docker-catalog.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'docker_catalog.wsgi.application'
+WSGI_APPLICATION = 'docker-catalog.wsgi.application'
 
 
 # Database

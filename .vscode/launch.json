@@ -8,7 +8,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\docker_catalog\\manage.py",
+            "program": "${workspaceFolder}\\docker-catalog\\manage.py",
             "args": [
                 "runserver",
                 "--noreload",

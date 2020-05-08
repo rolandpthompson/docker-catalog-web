@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # exclude base assets folder
-docker_catalog/assets
+docker-catalog/assets
