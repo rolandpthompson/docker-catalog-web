@@ -6,4 +6,12 @@ else
     cp -R /project_base_code/* /project_live_code
 fi
 
-python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000
+# collect the static files
+python3 manane.py collectstatic --noinput
+python3 manage.py migrate 
+
+# use the default django server - testing only
+#python3 manage.py runserver 0.0.0.0:8001
+
+# Run the Gunicorn process
+gunicorn docker_catalog.wsgi --bind=0.0.0.0:8001 --workers=3

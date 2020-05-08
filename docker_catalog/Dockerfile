@@ -17,23 +17,25 @@ VOLUME /project_live_code
 
 # The enviroment variable ensures that the python output is set straight
 # to the terminal with out buffering it first
-ENV PYTHONUNBUFFERED 1
-ENV DOCKER_BASE_URL http://192.168.8.21:4000/v2
-ENV DEBUG_ENABLED False
+ENV PYTHONUNBUFFERED 1 && \
+    DOCKER_BASE_URL http://192.168.8.21:4000/v2 && \
+    DEBUG_ENABLED False
 
 # Copy the current directory contents into the container at /docker_catalog_web
 ADD . /project_base_code/
-RUN mv /project_base_code/start.sh /scripts/start.sh
 
-# Install any needed packages specified in requirements.txt
-RUN pip install -r /project_base_code/requirements.txt
+# removed the assets folder if it exists - we build a new version when the container is created
+RUN rm -r /project_base_code/assets && \
+    # Install any needed packages specified in requirements.txt
+    pip install -r /project_base_code/requirements.txt
 
 # expose our port
-EXPOSE 8000/tcp
+EXPOSE 8001/tcp
 
 # copy script file  - This copies the initial files and keeps the process alive...
 # copy our start script
-RUN dos2unix /scripts/start.sh && chmod -v +x /scripts/start.sh
+RUN mv /project_base_code/start.sh /scripts/start.sh && \
+    dos2unix /scripts/start.sh && chmod -v +x /scripts/start.sh
 
 # Set the working directory to /docker_catalog_web
 WORKDIR /project_live_code
